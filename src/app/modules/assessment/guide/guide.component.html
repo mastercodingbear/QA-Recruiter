@@ -1,0 +1,32 @@
+<div
+    class="flex flex-col w-full items-center pt-4 p-2 sm:pt-30 sm:mx-auto"
+    *transloco="let t"
+>
+    <!-- Guide Title -->
+    <div class="text-2xl sm:text-3xl w-full text-center mb-4">
+        {{ t("Interest Guide Title") }}
+    </div>
+    <!-- Guide Text -->
+    <div class="flex flex-col max-w-240 mb-4">
+        <span class="flex max-w-200 text-base sm:text-xl items-center" *ngFor="let guide of guides">
+            <mat-icon
+                class="icon-size-5 mr-2 text-primary"
+                [svgIcon]="'heroicons_solid:check'"
+            ></mat-icon>
+            {{ t(guide) }}
+        </span>
+    </div>
+    <div class="flex w-full px-4 justify-end">
+        <button
+            class="fuse-mat-button-rounded bg-primary text-white"
+            mat-flat-button
+            [routerLink]="'/assessment'"
+        >
+            <span class="mr-2">{{ t("Next") }}</span>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:arrow-right'"
+            ></mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div
+    class="flex flex-col w-full items-center justify-center pt-10"
+    *transloco="let t"
+>
+    <!-- Logo -->
+    <div class="w-12 mx-auto">
+        <img src="assets/images/logo/kqlogo.png" />
+    </div>
+    <div class="flex flex-col w-full justify-center p-4" cdkDropListGroup>
+        <div class="mx-2 p-4">
+            <h2 class="bg-green-200 rounded text-xl px-2 py-4 text-center">
+                {{ t("Match") }}
+            </h2>
+
+            <div
+                id="final-result"
+                class="bg-gray-100 min-h-10"
+                [cdkDropListData]="finalResults"
+                (cdkDropListDropped)="drop($event)"
+                [cdkDropListEnterPredicate]="finalEnterPredicate(finalResults)"
+                [cdkDropListSortPredicate]="finalSortPredicate(finalResults)"
+                cdkDropList
+            >
+                <div
+                    class="relative flex justify-center bg-gray-200 p-4 my-3 shadow rounded text-base"
+                    *ngFor="let final of finalResults"
+                    [cdkDragDisabled]="final.isFinal"
+                    [cdkDragData]="final"
+                    cdkDrag
+                >
+                    <span class="absolute left-4">
+                        {{ final.point }}
+                    </span>
+                    <span class="text-lg">
+                        {{ final.label }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="mx-2 p-4" *ngIf="finalResults?.length !== 3">
+            <h2 class="bg-green-200 rounded text-xl px-2 py-4 text-center">
+                Available interest
+            </h2>
+
+            <div
+                class="bg-gray-100"
+                (cdkDropListDropped)="drop($event)"
+                [cdkDropListData]="displayResults"
+                [cdkDropListEnterPredicate]="availableEnterPredicate"
+                cdkDropList
+                cdkDropListSortingDisabled
+            >
+                <div
+                    class="relative flex justify-center bg-gray-200 p-4 my-3 shadow rounded text-base"
+                    *ngFor="let availableProfile of displayResults"
+                    [cdkDragData]="availableProfile"
+                    cdkDrag
+                >
+                    <span class="absolute left-4">
+                        {{ availableProfile.point }}
+                    </span>
+                    <span class="text-lg">
+                        {{ availableProfile.label }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="flex mt-3 justify-center items-center p-4"
+        *ngIf="finalResults?.length === 3"
+    >
+        <span class="mr-2"> Are you sure about this result? </span>
+
+        <button
+            class="fuse-mat-button-rounded bg-primary text-white"
+            [matTooltip]="t('Yes')"
+            mat-icon-button
+            (click)="onFinalResult()"
+        >
+            <mat-icon
+                class="icon-size-5 text-white"
+                [svgIcon]="'heroicons_solid:check'"
+            ></mat-icon>
+        </button>
+    </div>
+</div>

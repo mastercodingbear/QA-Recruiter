@@ -1,0 +1,51 @@
+<div class="flex flex-col flex-auto min-w-0 mt-16" *transloco="let t">
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div
+                class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12"
+            >
+                <!-- Logo -->
+                <div class="w-12 mx-auto">
+                    <img src="assets/images/logo/kqlogo.png" />
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <button
+                        class="fuse-mat-button-rounded bg-primary text-white"
+                        mat-flat-button
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:share'"
+                        ></mat-icon>
+                        <span class="ml-2">{{ t("Share") }}</span>
+                    </button>
+                    <button
+                        class="fuse-mat-button-rounded bg-primary text-white"
+                        mat-flat-button
+                        [routerLink]="'/assessment/help'"
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:pencil-alt'"
+                        ></mat-icon>
+                        <span class="ml-2">{{ t("Next") }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto">
+            <ng-container *ngFor="let level of candidateJobs | keyvalue">
+                <candidate-section
+                    [section]="level.value"
+                    class="mt-1 px-4"
+                ></candidate-section>
+            </ng-container>
+        </div>
+    </div>
+</div>
